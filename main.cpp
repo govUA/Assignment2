@@ -195,23 +195,17 @@ struct TextDocument {
             return;
         }
 
-        // Calculate the new length after replacement
         int repLen = strlen(replacement);
         int newLength = pos + repLen;
 
-        // Ensure capacity for new length
         current->ensureCapacity(newLength + 1);
 
-        // Calculate the length of the text after the replaced substring
         int remainingLength = current->length - (pos + repLen);
 
-        // Move the remaining text to make space for the replacement
         memmove(current->text + pos + repLen, current->text + pos + strlen(current->text + pos), remainingLength + 1);
 
-        // Copy the replacement text to the specified position
         memcpy(current->text + pos, replacement, repLen);
 
-        // Update the length of the line
         current->length = newLength;
     }
 
